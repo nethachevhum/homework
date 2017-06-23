@@ -1,6 +1,7 @@
 import os
 import re
 
+#было бы умно вынести это os.walk в отдельную функцию. Но я начал делать без нее, и в итоге на это у меня не хватило времени -- хотя это должно быть быстро.
 
 def open_file(name):
     f = open(name,"r")
@@ -32,19 +33,32 @@ def find_data():
                         t = text.read()
                         fd.append([file,"".join(re.findall("<meta content=\"([а-яА-ЯёЁ ]+)\" name=\"author\"></meta>",t)),\
                                    "".join(re.findall("<meta content=\"(.*)\" name=\"created\"></meta>",t))])
-    st = ""
+    st = "Название файла;Автор;Год создания\n"
     for line in fd:
-        st = st + "\t".join(line) + "\n"
-    print(st)
-        
+        st = st + ";".join(line) + "\n"
+    write_to_file(st,"output_2.csv")
+
+
+def find_bigrams():
+    for roots,dirs,files in os.walk("."):
+        for file in files:
+            if file.endswith(".xhtml"):
+                ar = open_file(os.path.join(roots,file))
+                for i,word in enumerate(ar): #а здесь можно было обойтись и без enumerate
+                    if re.search("<w><ana lex=\"(.+)\" gr=\"A.*gen",word):
+                        if re.search("<w><ana lex=\"(.+)\" gr=\"S.*gen",ar[i+1]):
+                            print(re.search("ana>(.+)<",word).group(1)+" " +re.search("ana>(.+)<",ar[i+1]).group(1))
+
+                        
 
 
 
 
+find_bigrams()
 
 
 
-find_data()
+#find_data()
 #count_words_infile() 
 
 
