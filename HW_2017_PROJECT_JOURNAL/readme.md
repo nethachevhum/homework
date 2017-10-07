@@ -7,7 +7,7 @@
 Автор готов продолжалть работу над программой и собранной коллекцией --
 если это необходимо для корпуса. 
 
-Архив с выпусками доступен здесь: https://drive.google.com/open?id=0Bx188MyMxMlxck0zZFE1S1Y3SVk
+Архив с выпусками доступен здесь: https://drive.google.com/open?id=0Bx188MyMxMlxRmplWFdYUG80X1U
 
 Иван Нектачев
 netkachev.hum@gmail.com 
