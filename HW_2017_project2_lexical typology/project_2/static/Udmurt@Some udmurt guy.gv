@@ -1,0 +1,18 @@
+// <Lattice object of 2 atoms 4 concepts 2 coatoms at 0x1c1bff19b70>
+digraph Lattice {
+	node [label="" shape=circle style=filled width=.25]
+	edge [dir=none labeldistance=1.5 minlen=2]
+	c0
+	c1
+	c1 -> c1 [color=transparent headlabel="уяны" labelangle=270]
+	c1 -> c1 [color=transparent labelangle=90 taillabel="floating swimming"]
+	c1 -> c0
+	c2
+	c2 -> c2 [color=transparent headlabel="verbs of motion" labelangle=270]
+	c2 -> c2 [color=transparent labelangle=90 taillabel=drifting]
+	c2 -> c0
+	c3
+	c3 -> c3 [color=transparent labelangle=90 taillabel=sailing]
+	c3 -> c1
+	c3 -> c2
+}

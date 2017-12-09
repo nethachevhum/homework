@@ -1,0 +1,66 @@
+// <Lattice object of 3 atoms 16 concepts 3 coatoms at 0x2ad863b73c8>
+digraph Lattice {
+	node [label="" shape=circle style=filled width=.25]
+	edge [dir=none labeldistance=1.5 minlen=2]
+	c0
+	c0 -> c0 [color=transparent headlabel="R = X = {}" labelangle=270]
+	c1
+	c1 -> c1 [color=transparent headlabel=equivalence labelangle=270]
+	c1 -> c0
+	c2
+	c2 -> c2 [color=transparent headlabel="total order" labelangle=270]
+	c2 -> c2 [color=transparent labelangle=90 taillabel=total]
+	c2 -> c0
+	c3
+	c3 -> c3 [color=transparent headlabel="strict total order" labelangle=270]
+	c3 -> c3 [color=transparent labelangle=90 taillabel=trichotomous]
+	c3 -> c0
+	c4
+	c4 -> c4 [color=transparent headlabel=tolerance labelangle=270]
+	c4 -> c4 [color=transparent labelangle=90 taillabel=symmetric]
+	c4 -> c1
+	c5
+	c5 -> c5 [color=transparent headlabel="partial order" labelangle=270]
+	c5 -> c2
+	c6
+	c6 -> c6 [color=transparent labelangle=90 taillabel=connected]
+	c6 -> c2
+	c6 -> c3
+	c7
+	c7 -> c7 [color=transparent headlabel="strict weak order" labelangle=270]
+	c7 -> c3
+	c8
+	c8 -> c8 [color=transparent labelangle=90 taillabel="neg. trans."]
+	c8 -> c6
+	c8 -> c7
+	c9
+	c9 -> c9 [color=transparent headlabel="strict partial order" labelangle=270]
+	c9 -> c9 [color=transparent labelangle=90 taillabel=asymmetric]
+	c9 -> c7
+	c10
+	c10 -> c10 [color=transparent headlabel="irrefl." labelangle=270]
+	c10 -> c10 [color=transparent labelangle=90 taillabel=irreflexive]
+	c10 -> c9
+	c11
+	c11 -> c11 [color=transparent headlabel=preorder labelangle=270]
+	c11 -> c1
+	c11 -> c5
+	c12
+	c12 -> c12 [color=transparent labelangle=90 taillabel=reflexive]
+	c12 -> c4
+	c12 -> c11
+	c13
+	c13 -> c13 [color=transparent labelangle=90 taillabel=antisymmetric]
+	c13 -> c5
+	c13 -> c8
+	c13 -> c9
+	c14
+	c14 -> c14 [color=transparent labelangle=90 taillabel=transitive]
+	c14 -> c11
+	c14 -> c13
+	c15
+	c15 -> c15 [color=transparent labelangle=90 taillabel=relation]
+	c15 -> c10
+	c15 -> c12
+	c15 -> c14
+}
