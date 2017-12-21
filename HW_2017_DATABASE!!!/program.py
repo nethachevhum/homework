@@ -7,7 +7,7 @@ def get_dbs():
     crsr = conn.cursor()
     conn2 = sqlite3.connect("words.db")
     crsr_words = conn2.cursor()
-    # crsr_words.execute("CREATE TABLE words(id INTEGER PRIMARY KEY,Lemma,Wordform,Glosses)")
+    crsr_words.execute("CREATE TABLE words(id INTEGER PRIMARY KEY,Lemma,Wordform,Glosses)")
     arr = [] #тут хранятся все строки исхожной БД
     for line in crsr.execute("select * from wordforms"):
         arr.append(line)
@@ -15,7 +15,7 @@ def get_dbs():
     conn2.commit()
     conn3 = sqlite3.connect("glosse.db")
     crsr_gloss = conn3.cursor()
-    # crsr_gloss.execute("CREATE TABLE glosses(id INTEGER PRIMARY KEY,Gloss,Meaning)")
+    crsr_gloss.execute("CREATE TABLE glosses(id INTEGER PRIMARY KEY,Gloss,Meaning)")
     glosses = {}
     glossesnum = {}
     with open("results.txt","r",encoding="utf-8") as f:
@@ -42,7 +42,7 @@ def get_dbs():
 
     conn4 = sqlite3.connect("ids.db")
     crsr_ids = conn4.cursor()
-    # crsr_ids.execute("CREATE TABLE ids (id INTEGER PRIMARY KEY,idname,idgloss)")
+    crsr_ids.execute("CREATE TABLE ids (id INTEGER PRIMARY KEY,idname,idgloss)")
     wordgloss = [] #это массив с ид слов и ид глосс
     for index, word in enumerate(arr):
         for el in word[2].split("."):
@@ -95,5 +95,5 @@ def get_graphs(wordgloss, glossids):
     plt.xticks(xs, labels)
     plt.show()
 
-
-get_graphs(get_dbs()[0],get_dbs()[1])
+crtg = get_dbs()
+get_graphs(crtg[0],crtg[1])
