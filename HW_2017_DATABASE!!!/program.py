@@ -1,4 +1,6 @@
 import sqlite3
+import matplotlib
+import matplotlib.pyplot as plt
 
 def get_dbs():
     conn = sqlite3.connect('hittite.db')
@@ -40,14 +42,13 @@ def get_dbs():
 
     conn4 = sqlite3.connect("ids.db")
     crsr_ids = conn4.cursor()
+    # crsr_ids.execute("CREATE TABLE ids (id INTEGER PRIMARY KEY,idname,idgloss)")
     wordgloss = [] #это массив с ид слов и ид глосс
     for index, word in enumerate(arr):
         for el in word[2].split("."):
             if el.isupper():
                 wordgloss.append([index+1,glossids[el]])
-
-
-
+                crsr_ids.execute("INSERT INTO ids (idname, idgloss) VALUES ('{}','{}')".format(index+1, glossids[el]))
     print(glossids)
     # print(glss)
     print(arr)
@@ -57,10 +58,42 @@ def get_dbs():
     #     crsr_words.execute("INSERT INTO words (Lemma, Wordform, Glosses) VALUES ('{}','{}','{}') ".format())
     print(wordgloss)
 
+    conn4.commit()
+    return wordgloss, glossids
 
     #не забыть коммит
     # print(conn)
 
 
+def get_graphs(wordgloss, glossids):
+    #сначала посчитаем частотность разных падежей
+    upd_ids = {v: k for k, v in glossids.items()}
+    cases = ["NOM","ACC","GEN","DAT","LOC","INSTR","ABL","DAT-LOC","VOC"]
+    casefreq = {}
+    for line in wordgloss:
+        if upd_ids[line[1]] in cases:
+            if not line[1] in casefreq:
+                casefreq[line[1]] = 1
+            else:
+                casefreq[line[1]] += 1
+    new_dct = {}
+    for key in casefreq:
+        new_dct[upd_ids[key]] = casefreq[key]
+    xs = []
+    ys = []
+    labels = []
+    # Order
+    a=0
+    for key in new_dct:
+        a += 1
+        xs.append(a)
+        labels.append(key)
+        ys.append(new_dct[key])
+    # plt.bar(xs, ys)
 
-get_dbs()
+    plt.bar(xs, ys, align='center')
+    plt.xticks(xs, labels)
+    plt.show()
+
+
+get_graphs(get_dbs()[0],get_dbs()[1])
