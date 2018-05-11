@@ -103,8 +103,6 @@ def webhook():
         flask.abort(403)
 
 
-if __name__ == '__main__':
-    bot.polling(non_stop=True)
 
 
 
