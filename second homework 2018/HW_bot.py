@@ -75,7 +75,7 @@ def replace_sentence(sent):
     symbs = ",.?!\'\"()[]+-=^%$#@"
     arr = [re.sub(r"(?:[а-яА-ЯёЁ]+)([,.?!\'\"()[\]+-=^%$#@]*)",r"{}\1".format(replace_word(word.strip(symbs))),word) for word in sent.split()]
     return " ".join(arr)
-print(replace_sentence("Сначала я был на Рижской. Там купил себе пивка, но оно было безалкогольное. Не считается... Пидоры!!!"))
+print(replace_sentence("Сначала я был на Рижской. Там купил себе пивка, но оно было безалкогольное. Не считается..."))
 
 WEBHOOK_URL_BASE = "https://{}:{}".format(conf.WEBHOOK_HOST, conf.WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/{}/".format(conf.TOKEN)
@@ -86,7 +86,7 @@ app = flask.Flask(__name__)
 
 @bot.message_handler(func=lambda m: True)
 def replace_sent(message):
-    bot.send_message(message.chat.id,replace_sentence(message.text))
+    bot.send_message(message.chat.id,"Дружище, правильно ли я понял, что ты имел в виду это \"{}\"?".format(replace_sentence(message.text)))
 
 @app.route('/', methods=['GET', 'HEAD'])
 def index():
