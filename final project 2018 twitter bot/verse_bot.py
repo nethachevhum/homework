@@ -96,8 +96,7 @@ class war_listener(tweepy.StreamListener):
     def on_status(self, status):
         if status.user.screen_name != "PoemsWar":
             numb_tweet = 0 # отслеживает, сколько твитов добавляется в алоритм
-            delay_const = 100 # каждые сколько твитов генерируется стихотворение
-            general_const = 0
+            delay_const = 20 # каждые сколько твитов генерируется стихотворение
             txt = ""
             try:
                 txt = status.extended_tweet['full_text']
@@ -105,12 +104,15 @@ class war_listener(tweepy.StreamListener):
                 txt = status.text
             print('Reply to user @{}, tweet: {}'.format(status.user.screen_name, txt))
             # api.update_status(random.choice(ran))
+            length = len(array)
             if not re.search("(RT)|(Reply)",txt):
                 array.append(txt)
                 numb_tweet += 1
-                general_const += 1
-            print(array)
-            if numb_tweet == delay_const:
+                print(length)
+            # print(array)
+            print("=={}==".format(length))
+            if length%delay_const == 0:
+                length += 1
                 print("\n===============\nBINGO!!!\n================")
                 # print(self.generator(array))
                 numb_tweet = 0
